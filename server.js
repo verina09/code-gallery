@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
             imgData.push(row);
         })
         .on('end', () => {
-            
+
             res.render('pages/index', {
                 imgData: imgData,
             });
@@ -49,4 +49,4 @@ app.post('/submitLink', function(req, res){
     res.redirect('/')
 });
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080)
