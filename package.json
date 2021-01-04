@@ -1,7 +1,12 @@
 {
   "name": "node-ejs",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-write-stream": "^2.0.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1"
   }

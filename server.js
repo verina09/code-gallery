@@ -2,30 +2,51 @@
 var express = require('express');
 var app = express();
 
+const fs = require('fs');
+const csv = require('csv-parser');
+const csvWriter = require('csv-write-stream')
+
+const bodyParser  = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// use res.render to load up an ejs view file
+var sampleFrame = '<iframe src="https://trinket.io/embed/python/6ebe39efb6?outputOnly=true&start=result&showInstructions=true" width="20%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>'
 
 // index page 
 app.get('/', function(req, res) {
-    var mascots = [
-        { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
-        { name: 'Tux', organization: "Linux", birth_year: 1996},
-        { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
-    ];
-    var tagline = "No programming concept is complete without a cute animal mascot.";
 
-    res.render('pages/index', {
-        mascots: mascots,
-        tagline: tagline
-    });
+    var imgData = []
+    fs.createReadStream('data.csv')
+        .pipe(csv())
+        .on('data', (row) => {
+            imgData.push(row);
+        })
+        .on('end', () => {
+            
+            res.render('pages/index', {
+                imgData: imgData,
+            });
+
+        });
+
+
 });
 
-// about page
-app.get('/about', function(req, res) {
-    res.render('pages/about');
+//add API to remove?
+
+app.post('/submitLink', function(req, res){
+    
+    //TODO: need to check if ID exist?
+    var cleanURL = req.body.urlName.split('/').pop()
+    var writer = csvWriter({sendHeaders: false})
+    writer.pipe(fs.createWriteStream('data.csv', {flags: 'a'}))
+    writer.write({id: cleanURL, user: req.body.userName, time: new Date()})
+    writer.end()
+
+    res.redirect('/')
 });
 
 app.listen(8080);
-console.log('8080 is the magic port');
