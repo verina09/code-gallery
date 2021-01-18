@@ -18,15 +18,40 @@ var sampleFrame = '<iframe src="https://trinket.io/embed/python/6ebe39efb6?outpu
 // index page 
 app.get('/', function(req, res) {
 
+    res.render('pages/index');
+
+});
+
+app.get('/activity_1', function(req, res) {
+
     var imgData = []
-    fs.createReadStream('data.csv')
+    fs.createReadStream('data_1.csv')
         .pipe(csv())
         .on('data', (row) => {
             imgData.push(row);
         })
         .on('end', () => {
 
-            res.render('pages/index', {
+            res.render('pages/activity_1', {
+                imgData: imgData,
+            });
+
+        });
+
+
+});
+
+app.get('/activity_2', function(req, res) {
+
+    var imgData = []
+    fs.createReadStream('data_2.csv')
+        .pipe(csv())
+        .on('data', (row) => {
+            imgData.push(row);
+        })
+        .on('end', () => {
+
+            res.render('pages/activity_2', {
                 imgData: imgData,
             });
 
@@ -37,12 +62,24 @@ app.get('/', function(req, res) {
 
 //add API to remove?
 
-app.post('/submitLink', function(req, res){
+app.post('/submitLink_1', function(req, res){
     
     //TODO: need to check if ID exist?
     var cleanURL = req.body.urlName.split('/').pop()
     var writer = csvWriter({sendHeaders: false})
-    writer.pipe(fs.createWriteStream('data.csv', {flags: 'a'}))
+    writer.pipe(fs.createWriteStream('data_1.csv', {flags: 'a'}))
+    writer.write({id: cleanURL, user: req.body.userName, time: new Date()})
+    writer.end()
+
+    res.redirect('/')
+});
+
+app.post('/submitLink_2', function(req, res){
+    
+    //TODO: need to check if ID exist?
+    var cleanURL = req.body.urlName.split('/').pop()
+    var writer = csvWriter({sendHeaders: false})
+    writer.pipe(fs.createWriteStream('data_2.csv', {flags: 'a'}))
     writer.write({id: cleanURL, user: req.body.userName, time: new Date()})
     writer.end()
 

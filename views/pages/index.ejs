@@ -5,41 +5,80 @@
 </head>
 <body class="container-fluid">
 
-    <header>
+    <!-- <header>
         <%- include('../partials/header'); %>
-    </header>
+    </header> -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Creative Coding Gallery</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="./">Main</a> 
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./activity_1">Activity 1</a> 
+              </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./activity_2">Activity 2</a> 
+          </li>
+        </ul>
+      </nav>
 
     <main>
-        <div id="imgHolder" class="jumbotron jumbotron-fluid">
-        </div>
+        <div class="jumbotron jumbotron-fluid">
+            <!-- <div><p class="h4">Description</p></div> -->
+            <div><p class="">Today, more designers are learning to code for creative purposes. For example, our students at the Architecture and Sustainable Design pillar at SUTD often write programs to generate and explore different building designs. In this workshop, we will introduce you to the field of creative coding by using Processing—a popular, free software sketchbook. You will learn to write small computer programs to manipulate images. See how pictures can be transformed creatively through code!
 
-        <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Upload Your Code Here</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                No prior coding knowledge is necessary. This workshop will be taught remotely using freely available tools.</p></div>
+
+            <div><p class="h4">Schedule</p></div>
+            <div class="">
+                <div class="row">
+                    <div class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.30 - 3.00 PM</div>
+                    <div class="col-10">schedule 1</div>
+                  </div>
+                <div class="row">
+                  <div class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.30 - 3.00 PM</div>
+                  <div class="col-10">schedule 1</div>
                 </div>
-                <div class="modal-body">
-                    <form action="/submitLink" method="post">
-                        <div class="form-group">
-                            <label class="col-form-label" for="urlName">Code URL:</label>
-                            <input class="form-control" name="urlName" id="urlName" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label" for="userName">Your name: </label>
-                            <input class="form-control" name="userName" id="userName" type="text">
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Save</button>
-                        </div>
-                    </form>
-                </div>
+                <div class="row">
+                    <div class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.30 - 3.00 PM</div>
+                    <div class="col-10">schedule 1</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.30 - 3.00 PM</div>
+                    <div class="col-10">schedule 1</div>
+                  </div>
+              </div>
+            <br>
+            <div><p class="h4">Links</p>
+                <ul>
+                    <li>
+                        <a href="./">Link 1</a> 
+                      </li>
+                      <li>
+                        <a href="./">Link 1</a> 
+                      </li>
+                      <li>
+                        <a href="./">Link 1</a> 
+                      </li>
+                </ul>
+            </div>
+
+            <div ><p class="h4">Who we are</p> </div>
+            <div class="row">
+                <div class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="150" height="200" src="https://asd.sutd.edu.sg/files/asd-faculty-jason-lim.jpg"></div>
+                <div class="col">Jason is an adjunct Assistant Professor at SUTD and director of TakahashiLim A + D, a design consultancy based in Singapore.
+
+                    Jason received a doctorate from ETH Zurich, completing his dissertation under the supervision of Professors Matthias Kohler and Fabio Gramazio, and Dr Robert Aish. He also holds a Master of Engineering degree from the Stevens Institute of Technology, as well as a Bachelor of Architecture degree from Cornell University.
+                    
+                    Jason worked previously as a PhD researcher at the Future Cities Lab in the Singapore-ETH centre, and as an architectural designer at BriggsKnowles Architecture + Design in New York City. In addition, Jason has taught at Parsons the New School for Design, Stevens Institute of Technology, and the National University of Singapore.</div>
+                <div class="col-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img style="padding: left 10px;" width="150" height="200" src="https://asd.sutd.edu.sg/files/asd-phd-student-verina-cristie.jpg"></div>
+                <div class="col">Verina Cristie is a PhD candidate supervised by Asst. Prof. Sam Conrad Joyce in Architecture and Sustainable Design pillar at the SUTD, and part of Meta Design Lab research group which focuses on the intersection between creative design and computation. She received her Master’s Degree in Digital Media Technology from the School of Computer Engineering in Nanyang Technological University, Singapore, and he Bachelor’s Degree in Computer Science with Specialisation in Multimedia and Games Development.
+
+                    Prior to SUTD, she worked as a research assistant in SEC’s Future Cities Laboratory, where she built an interactive platform for urban data exploration. She also did an internship in Berkeley Education Alliance Research Singapore where she built a lighting control system user interface before.</div>
             </div>
         </div>
-    </div>
     </main>
 
     <footer>
@@ -49,25 +88,6 @@
 </body>
 
  <script>
-var data = <%- JSON.stringify(imgData) %>
-
-//form HTML iframe
-var htmlImgStr = ''
-
-data.forEach(function(item) {
-
-    var srcURL = 'https://trinket.io/embed/python/' + item.id
-    var itemStr = '<div id="imgItem"><iframe src="' + srcURL +
-    '?outputOnly=true&start=result&showInstructions=true"' +
-    ' width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" '+
-    'allowfullscreen"></iframe>'+
-    '<p><a href="'+ srcURL +'">' + item.user + '</a></p></div>'
-
-    htmlImgStr += itemStr
-});
-
-document.getElementById('imgHolder').innerHTML = htmlImgStr
-
-  </script>
+</script>
 
 </html>
