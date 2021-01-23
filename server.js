@@ -71,7 +71,7 @@ app.post('/submitLink_1', function(req, res){
     writer.write({id: cleanURL, user: req.body.userName, time: new Date()})
     writer.end()
 
-    res.redirect('/')
+    res.redirect('/activity_1')
 });
 
 app.post('/submitLink_2', function(req, res){
@@ -83,7 +83,7 @@ app.post('/submitLink_2', function(req, res){
     writer.write({id: cleanURL, user: req.body.userName, time: new Date()})
     writer.end()
 
-    res.redirect('/')
+    res.redirect('/activity_2')
 });
 
 app.listen(process.env.PORT || 8080)
